@@ -1,0 +1,97 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
+import MainLayout from "@/layouts/main-layout.astro";
+import { cn } from "@/lib/utils";
+import Icon from "astro-icon";
+---
+
+<MainLayout title="DragonJayの小铺子">
+  <section class="space-y-6 pb-12 pt-16 lg:py-28">
+    <div
+      class="container mx-auto flex max-w-screen-lg flex-col items-center gap-8 text-center"
+    >
+
+      <h1
+        class="font-heading text-balance text-4xl font-extrabold !leading-[1.1] tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl"
+      >
+      游戏打蛋机 
+      </h1>
+
+      <p
+        class="max-w-[42rem] text-balance break-normal leading-relaxed text-gray-700 sm:text-xl sm:leading-7 dark:text-gray-300"
+      >
+      一个使用 Astro v4 + shadcn/ui 构建的打蛋机。灵感源自shadcn/taxonomy
+      </p>
+
+      <div class="flex justify-center space-x-2 md:space-x-4">
+        <a
+          href="/blog"
+          class="flex cursor-pointer items-center justify-center space-x-2 rounded-md border-2 border-black bg-[#9466f5] px-10 py-3 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none md:space-x-4"
+        >
+          那就来罢
+        </a>
+        <a
+          href="https://chat.dragonjay.top"
+          target="_blank"
+          rel="noreferrer"
+          class="flex cursor-pointer items-center justify-center space-x-2 rounded-md border-2 border-black bg-[#3eb6ff] px-10 py-3 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none md:space-x-4"
+        >
+          <Icon name="mdi:chat" class="mr-2 size-5" />
+           AI Chat
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section
+    id="features"
+    class="container space-y-6 bg-slate-50 py-8 dark:bg-transparent md:py-12 lg:py-24"
+  >
+    <div
+      class="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center"
+    >
+      <h2 class="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
+        你 被 骗 了
+      </h2>
+      <p
+        class="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7 balance-text"
+      >
+        你想要的功能都没有(被厥了
+      </p>
+    </div>
+    <video controls autoplay loop preload="auto" title="你被骗了" class="mx-auto w-full max-w-4xl rounded-lg shadow-lg">
+      <source src="https://file.dragonjay.top/d/Onedrive/video/nibeipianla.mp4?sign=EJdoSp3SS_-2M2tCsCvLPgSj2DhKyuEXqEj_TIj58ro=:0" type="video/mp4" />
+    </video>
+    <div class="mx-auto text-center md:max-w-[58rem]">
+      <p
+        class="leading-normal text-muted-foreground sm:text-lg sm:leading-7 balance-text"
+      >
+        但是这个打蛋机中包含了Markdown 和 MDX，使得大家可以很好的上手
+      </p>
+    </div>
+  </section>
+  <section id="open-source" class="container py-8 md:py-12 lg:py-28">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="rounded-lg bg-white p-6 shadow dark:bg-gray-800">
+        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">加入QQ群</h2>
+        <p class="mt-4 text-gray-600 dark:text-gray-400">虽然还没有QQ群，但是可以添加QQ410714630来骗，来偷袭！</p>
+      </div>
+      <div class="rounded-lg bg-white p-6 shadow dark:bg-gray-800">
+        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">加入 Telegram 讨论组</h2>
+        <p class="mt-4 text-gray-600 dark:text-gray-400">虽然还没有 Telegram 讨论组，但是可以...</p>
+        <a class="box-border inline-block h-[42px] animate-[bg-move_linear_5s_infinite] cursor-pointer overflow-hidden rounded-[22px] bg-[#2481cc] bg-no-repeat px-6 py-[13px] align-top font-[bold] text-sm uppercase leading-[17px] text-white no-underline" href="tg://resolve?domain=Ne1lBowman">发消息</a>
+      </div>
+      <div class="rounded-lg bg-white p-6 shadow dark:bg-gray-800">
+        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">爱发电</h2>
+        <p class="mt-4 text-gray-600 dark:text-gray-400">
+          通过爱发电支持我。<br />
+          帮我分担不需要服务器的费用，或者不请我喝咖啡。
+        </p>
+        <a href="https://afdian.net/a/dragonjay" class="cursor-pointer text-[rgba(0,0,0,0.8)] no-underline"
+          ><div class="relative box-border inline-flex cursor-pointer items-center justify-center self-center whitespace-nowrap rounded-sm bg-[linear-gradient(90deg,#946ce6,#7e5fd9)] px-[50px] py-[13px] text-base leading-none text-white"><!----><span class="mr-2">￥</span>为TA发电</div></a
+        >
+      </div>
+    </div>    
+  </section>
+</MainLayout>

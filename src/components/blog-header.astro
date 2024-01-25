@@ -1,0 +1,54 @@
+---
+import { getCategories } from "@/lib/fetchers";
+import { cn } from "@/lib/utils";
+
+const categories = await getCategories();
+
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+const { category } = Astro.params;
+---
+
+<h1 class="inline-block font-heading text-4xl tracking-tight leading-tight sm:text-5xl md:text-6xl">{title}</h1>
+
+<div
+  class="flex items-center justify-between my-8 max-w-screen-md:gap-4"
+>
+
+  {
+    categories?.length ? (
+      <ul class="flex snap-x snap-mandatory overflow-auto items-center space-x-2 lg:space-x-2.5 pb-2">
+        <li class="flex h-10 flex-shrink-0 cursor-pointer snap-start items-center rounded-md border-2 border-black bg-[#bc95d4] px-4 py-2 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none">
+          <a
+            href={`/blog`}
+            class={cn(
+              !category ? "select-none" : "",
+            )}
+          >
+            所有帖子
+          </a>
+        </li>
+        {categories.map((item) => (
+          <li class="flex h-10 flex-shrink-0 cursor-pointer snap-start items-center rounded-md border-2 border-black bg-[#bc95d4] px-4 py-2 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none">
+            <a
+              href={`/blog/category/${item}`}
+              class={cn(
+                "capitalize",
+                item === category ? "select-none" : "",
+              )}
+            >
+              {item}
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div />
+    )
+  }
+</div>
+
+<hr class="my-10 border-gray-200 dark:border-gray-700 opacity-25" />

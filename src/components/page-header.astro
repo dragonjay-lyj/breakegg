@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  heading: string;
+  text?: string;
+  className?: string;
+}
+const { heading, text, className, ...attrs } = Astro.props;
+---
+
+<div class={`space-y-4 ${className}`} {...attrs}>
+  <h1 class="inline-block font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tighter">
+    {heading}
+  </h1>
+  {text && (
+    <p class="text-xl text-gray-800 dark:text-gray-300 text-opacity-80 max-w-prose">
+      {text}
+    </p>
+  )}
+</div>
+<hr class="my-8 border-t border-gray-200 dark:border-gray-700 opacity-25" />

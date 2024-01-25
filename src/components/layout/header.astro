@@ -1,0 +1,45 @@
+---
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+
+import Icon from "astro-icon";
+
+type Props = {
+  className?: string;
+};
+
+const { className } = Astro.props;
+---
+
+<header
+  class={cn(
+    "mx-auto flex w-full max-w-full items-center justify-between pl-[2vw] pr-0 transition-all duration-[0.6s] bg-background dark:bg-background-dark sticky top-0 z-50 h-16 shadow-md backdrop-blur-md md:h-20 md:shadow-lg dark:backdrop-blur-md",
+    className
+  )}
+>
+<div class="container relative flex w-full items-center justify-between px-4 sm:px-6 lg:px-8">
+  <div class="relative float-right ml-0 mr-auto flex items-center gap-4 md:gap-6 lg:gap-8">
+    <a href="/" class="flex items-center space-x-2 md:hidden lg:flex">
+      <Icon name="stars-outline" className="text-primary group-hover:text-accent h-8 w-8 transition-colors duration-300" />
+      <span class="hidden text-xl font-bold sm:inline-block"> {siteConfig.name} </span>
+    </a>
+
+    <slot name="mobile-nav-header" />
+
+    <div class="mr-0 flex items-center space-x-4 border-l-2 border-solid border-l-[black] md:flex">
+      <slot name="left-header" />
+    </div>
+  </div>
+
+  <!-- logo mobile center -->
+  <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform md:hidden">
+    <a href="/" aria-label="Astronomy homepage" class="bg-neutral-foreground text-primary hover:bg-accent focus-visible:ring-primary flex items-center justify-center rounded-full p-2 transition-all duration-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+      <Icon name="stars-outline" className="h-8 w-8" />
+    </a>
+  </div>
+
+  <div class="flex items-center space-x-4">
+    <slot name="right-header" />
+  </div>
+</div>
+</header>

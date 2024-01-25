@@ -1,0 +1,37 @@
+---
+import { cn } from "@/lib/utils";
+
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  href?: string;
+  className?: string;
+  disabled?: boolean;
+}
+const { href, className, disabled, ...attrs } = Astro.props;
+---
+
+<div
+  class={cn(
+    "group relative w-full rounded-lg border border-gray-200 bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg",
+    disabled && "cursor-not-allowed opacity-60 pointer-events-none",
+    className
+  )}
+  {...attrs}
+>
+  <div class="flex flex-col justify-between space-y-4">
+    <div
+      class="space-y-2 text-gray-900 dark:text-gray-100 [&>h3]:mt-0 !text-lg [&>h4]:mt-0 !text-base [&>p]:text-gray-700 dark:text-gray-400"
+    >
+      <slot />
+    </div>
+  </div>
+  {href && (
+    <a href={disabled ? "#" : href} class="absolute inset-0 block w-full h-full top-0 left-0 focus:outline-none">
+      <span class="sr-only">View</span>
+      {disabled ? null : (
+        <span class="invisible group-hover:visible transition-opacity duration-300 absolute inset-0 bg-primary-color opacity-50"></span>
+      )}
+    </a>
+  )}
+</div>

@@ -1,0 +1,40 @@
+---
+import BlogHeader from "@/components/blog-header.astro";
+import BlogCard from "@/components/cards/blog-card.astro";
+import MainLayout from "@/layouts/main-layout.astro";
+import { getPostsByCategory } from "@/lib/fetchers";
+import { capitalizer } from "@/lib/utils";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { category: post.data.category },
+  }));
+}
+
+const { category } = Astro.params;
+
+if (!category) {
+  return new Response(null, {
+    status: 404,
+    statusText: "Not found",
+  });
+}
+
+const posts = await getPostsByCategory(category);
+---
+
+<MainLayout title={`${capitalizer(category)} | Blog`} description={`All posts for ${category} category`}>
+  <section class="container py-10 mx-auto">
+    <BlogHeader title={`Posts by ${category} category`} />
+
+    <div
+      class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 md:gap-y-16 xl:gap-x-12"
+    >
+      {posts.map((post) => (
+        <BlogCard {...post} />
+      ))}
+    </div>
+  </section>
+</MainLayout>

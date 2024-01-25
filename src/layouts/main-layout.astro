@@ -1,0 +1,54 @@
+---
+import Footer from "@/components/layout/footer.astro";
+import Header from "@/components/layout/header.astro";
+import { MainNavigationMenu } from "@/components/main-navigation-menu";
+import { cn } from "@/lib/utils";
+import BaseLayout from "./base-layout.astro";
+import { SheetMobileNav } from "@/components/layout/sheet-mobile-nav";
+import { navMenuConfig } from "@/config/nav-menu";
+// import { marketingConfig } from "@/config/marketing";
+// import MainNav from "@/components/layout/main-nav.astro";
+
+type Props = {
+  title: string;
+  description?: string;
+  mainClass?: string;
+};
+
+const { title, description, mainClass } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <Header>
+    {/* If using only normal links */}
+    {/* <MainNav items={marketingConfig.mainNav} slot="left-header" />
+    <SheetMobileNav
+      mainNavItems={marketingConfig.mainNav}
+      slot="mobile-nav-header"
+      client:load
+    /> */}
+
+    {/* If using Navigation Menu on desktop */}
+    <MainNavigationMenu slot="left-header" client:load />
+    <SheetMobileNav
+      mainNavItems={[...navMenuConfig.links]}
+      sidebarNavItems={[
+        ...navMenuConfig.infosNav,
+        ...navMenuConfig.examplesNav,
+      ]}
+      slot="mobile-nav-header"
+      client:load
+    />
+
+    <nav slot="right-header" class="flex justify-end items-center">
+    </nav>
+  </Header>
+
+  <main class={cn(mainClass, 'flex-1 relative')}>
+    <div class="container mx-auto px-4 sm:px-6 md:px-8">
+      <slot />
+    </div>
+  </main>
+
+  <Footer className="bg-gray-100 dark:bg-gray-900 py-8" />
+</BaseLayout>

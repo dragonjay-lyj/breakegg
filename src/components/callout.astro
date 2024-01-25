@@ -1,0 +1,34 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+  icon?: string;
+  type?: "default" | "warning" | "danger" | "info";
+}
+
+// ✅💡⚠️🚫🚨
+const { icon, type = "default" } = Astro.props;
+---
+
+<div
+  class={cn(
+    "mt-6 flex items-start rounded-lg px-5 py-3 border transition-shadow duration-200",
+    {
+      "border-blue-200 text-blue-800 bg-blue-100 dark:bg-blue-900/10 dark:border-blue-400/50 hover:shadow-lg group-hover:bg-blue-50 group-hover:border-blue-400":
+        type === "info",
+      "border-red-200 text-red-900 bg-red-100 dark:bg-red-900/10 dark:border-red-400/50 hover:shadow-lg group-hover:bg-red-50 group-hover:border-red-400":
+        type === "danger",
+      "border-yellow-200 text-orange-800 bg-yellow-100 dark:bg-yellow-900/10 dark:border-yellow-400/50 hover:shadow-lg group-hover:bg-yellow-50 group-hover:border-yellow-400":
+        type === "warning",
+    }
+  )}
+>
+  {icon && (
+    <span class="mr-3 inline-flex items-center justify-center text-xl leading-6 font-semibold rounded-full">
+      {icon}
+    </span>
+  )}
+  <div class="callout">
+    <slot />
+  </div>
+</div>

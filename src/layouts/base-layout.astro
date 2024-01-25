@@ -1,0 +1,28 @@
+---
+import BaseHead from "@/components/layout/base-head.astro";
+import TailwindIndicator from "@/components/tailwind-indicator.astro";
+
+type Props = {
+  title: string;
+  description?: string;
+  bodyClass?: string;
+};
+
+const { title, description, bodyClass } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <BaseHead title={title} description={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico" />
+    <link href="/styles/global.css" rel="stylesheet" />
+  </head>
+  <body class="flex flex-col min-h-screen text-gray-900 bg-white dark:bg-gray-900 dark:text-white transition-colors duration-300">
+    <div class="antialiased text-sm md:text-base">
+      <slot />
+    </div>
+    <TailwindIndicator className="absolute bottom-2 right-2 z-50 opacity-75 group-hover:opacity-100 transition-opacity duration-200" />
+  </body>
+</html>
