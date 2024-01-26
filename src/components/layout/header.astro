@@ -1,6 +1,7 @@
 ---
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { ModeToggle } from '@/components/ModeToggle';
 
 import Icon from "astro-icon";
 
@@ -17,16 +18,18 @@ const { className } = Astro.props;
     className
   )}
 >
-<div class="container relative flex w-full items-center justify-between px-4 sm:px-6 lg:px-8">
-  <div class="relative float-right ml-0 mr-auto flex items-center gap-4 md:gap-6 lg:gap-8">
-    <a href="/" class="flex items-center space-x-2 md:hidden lg:flex">
-      <Icon name="stars-outline" className="text-primary group-hover:text-accent h-8 w-8 transition-colors duration-300" />
-      <span class="hidden text-xl font-bold sm:inline-block"> {siteConfig.name} </span>
+<div class="relative container flex items-center justify-between w-full">
+  <div class="flex items-center gap-6 md:gap-8 lg:gap-10">
+    <a href="/" class="hidden items-center space-x-2 md:flex">
+      <Icon name="stars-outline" class="size-8" />
+      <span class="hidden font-bold sm:inline-block">
+        {siteConfig.name}
+      </span>
     </a>
 
     <slot name="mobile-nav-header" />
 
-    <div class="mr-0 flex items-center space-x-4 border-l-2 border-solid border-l-[black] md:flex">
+    <div class="relative float-right ml-0 mr-auto hidden items-center md:flex">
       <slot name="left-header" />
     </div>
   </div>
@@ -38,8 +41,9 @@ const { className } = Astro.props;
     </a>
   </div>
 
-  <div class="flex items-center space-x-4">
+  <div class="mr-0 flex items-center space-x-4 border-l-2 border-solid border-l-[black]">
     <slot name="right-header" />
+    <ModeToggle client:load />
   </div>
 </div>
 </header>

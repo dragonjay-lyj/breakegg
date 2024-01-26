@@ -3,14 +3,19 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn, formatDate } from "@/lib/utils";
 import { Icon } from "astro-icon";
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import MainLayout from "./main-layout.astro";
+import {Card, CardHeader, CardContent, CardFooter} from "@/components/ui/card";
+import { Link, Button } from "@nextui-org/react";
+import {X, Visibility} from '@mui/icons-material/';
+import '@waline/client/style';
+
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 type Props = CollectionEntry<"blog">;
 
 const slug = Astro.props.slug;
-const { title, description, pubDate, updatedDate, coverImage, category } =
+const { title, description, pubDate, updatedDate, coverImage, category, auther, twitter, autherdes, pixiv, src, username,} =
   Astro.props.data;
 ---
 
@@ -20,7 +25,7 @@ const { title, description, pubDate, updatedDate, coverImage, category } =
       href="/blog"
       class={cn(
         buttonVariants({ variant: "ghost" }),
-        "absolute left-[-200px] top-10 hidden xl:inline-flex text-muted-foreground"
+        "text-muted-foreground absolute left-[-200px] top-10 hidden cursor-pointer items-center rounded-md border-2 border-black bg-[#bc95d4] px-10 py-3 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none xl:inline-flex"
       )}
       transition:animate="slide"
     >
@@ -32,13 +37,17 @@ const { title, description, pubDate, updatedDate, coverImage, category } =
       <a href={`/blog/category/${category}`}>
         <Badge
           radius="md"
-          className="capitalize"
+          className="capitalize w-min rounded-full border-2 border-black bg-[#bc95d4] px-3 py-1.5 text-sm font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none"
           transition:name={"category-" + slug}
         >
           {category}
         </Badge>
       </a>
-      <Image
+      <Badge radius="md" className="waline-pageview-count capitalize w-min rounded-full border-2 border-black bg-[#bc95d4] px-3 py-1.5 text-sm font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none" data-path="">
+        <Visibility sx={{ fontSize: 14 }}/>
+      </Badge>
+      <a data-fancybox data-src={coverImage}>
+      <img
         class="rounded-xl overflow-hidden my-6"
         width={1020}
         height={510}
@@ -46,6 +55,7 @@ const { title, description, pubDate, updatedDate, coverImage, category } =
         alt=""
         transition:name={"img-" + slug}
       />
+    </a>
       <div class="flex items-center justify-between">
         <span
           class="font-medium text-muted-foreground"
@@ -63,8 +73,56 @@ const { title, description, pubDate, updatedDate, coverImage, category } =
         {title}
       </h1>
       <p>{description}</p>
+      <Card className="max-w-[340px] rounded-lg shadow-md bg-white dark:bg-gray-900">
+        <CardHeader className="p-4 justify-between border-b border-gray-200 dark:border-gray-700">
+          <div class="flex gap-3">
+            <img class="w-10 h-10 rounded-full" src={src} alt="" />
+            <div class="flex flex-col gap-1.5 items-start">
+              <h4 class="text-sm font-medium text-gray-900 dark:text-white">{auther}</h4>
+              <h5 class="text-sm tracking-tight text-default-400">{username}</h5>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="px-3 py-4">
+          {autherdes}
+        </CardContent>
+        <CardFooter className="gap gird gap-2 bg-white/[.1] dark:bg-black/[.1] p-4 rounded-b-lg border-t border-gray-200 dark:border-gray-700">
+          <Button
+            className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none"
+            href={twitter}
+            as={Link}
+          >
+            <X className="mr-1.5 h-5 w-5 fill-current" /> Twitter
+          </Button>
+          <Button
+            className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+            href={pixiv}
+            as={Link}
+            style={{ backgroundColor: '#0096fa', color: 'white' }}
+          >
+            Pixiv
+          </Button>
+        </CardFooter>
+      </Card>
       <hr class="my-6" />
       <slot />
     </article>
   </div>
+  <div id="waline"></div>
+    <script type="module">
+      import { init } from 'https://cdnjs.cloudflare.com/ajax/libs/waline/3.0.0-alpha.10/waline.js';
+    
+      init({
+      el: '#waline',
+      serverURL: 'https://your-domain.vercel.app',
+      pageview: true,
+    });
+    </script>
+    <script type="module">
+      import { Fancybox } from "https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.esm.js";
+
+      Fancybox.bind('[data-fancybox]', {
+        //
+      });    
+    </script>
 </MainLayout>
