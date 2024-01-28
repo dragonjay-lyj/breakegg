@@ -6,20 +6,22 @@ import { Icon } from "astro-icon";
 import type { CollectionEntry } from "astro:content";
 import MainLayout from "./main-layout.astro";
 import { Link, Button } from "@nextui-org/react";
-import {X, Visibility} from '@mui/icons-material/';
+import {Visibility} from '@mui/icons-material/';
 import '@waline/client/style';
-
+import HoverCard from '@/components/HoverCardD';
+import DominantColorExtractor from '@/components/DominantColorExtractor';
 
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 type Props = CollectionEntry<"blog">;
 
 const slug = Astro.props.slug;
-const { title, description, pubDate, updatedDate, coverImage, category, auther, twitter, autherdes, pixiv, src, username,} =
+const { title, description, pubDate, updatedDate, coverImage, category, tdes, pixiv, tsrc, username, thref, tpubDate} =
   Astro.props.data;
 ---
 
 <MainLayout title={title} description={description}>
+  <DominantColorExtractor imageUrl={coverImage} client:load>
   <div class="relative container max-w-screen-md py-10">
     <a
       href="/blog"
@@ -74,14 +76,7 @@ const { title, description, pubDate, updatedDate, coverImage, category, auther, 
       </h1>
       <p>{description}</p>
         <div class="flex flex-grow gap-2 gird">
-          
-          <Button
-            className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none"
-            href={twitter}
-            as={Link}
-          >
-            <X className="mr-1.5 h-5 w-5 fill-current" /> Twitter
-          </Button>
+          <HoverCard thref={thref} tsrc={tsrc} username={username} tdes={tdes} tpubDate={tpubDate} client:load/>
           <Button
             className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
             href={pixiv}
@@ -112,4 +107,5 @@ const { title, description, pubDate, updatedDate, coverImage, category, auther, 
         //
       });    
     </script>
+    </DominantColorExtractor>
 </MainLayout>
