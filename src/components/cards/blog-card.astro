@@ -9,13 +9,13 @@ type Props = CollectionEntry<"blog">;
 const post = Astro.props;
 ---
 
-<article class="h-full w-full rounded-md border-2 border-black bg-white hover:shadow-[8px_8px_0px_rgba(0,0,0,1)] group space-y-4 ">
+<article class="group space-y-4 bg-white dark:bg-[#111827] rounded-2xl hover:scale-95 duration-300 overflow-hidden hover:shadow-lg hover:brightness-95 w-full border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
   <a
     href={`/blog/${post.slug}/`}
-    class="flex group-hover:-translate-y-2 group-hover:shadow-xl transition duration-300 cursor-pointer h-1/2 w-full border-b-2 border-black"
+    class="flex h-52 group-hover:-translate-y-2 transition duration-300"
   >
     <Image
-      class="w-full h-full object-cover object-center overflow-hidden"
+      class="w-full h-full object-cover rounded-xl overflow-hidden"
       width={400}
       height={200}
       src={post.data.coverImage}
@@ -23,19 +23,19 @@ const post = Astro.props;
       transition:name={"img-" + post.slug}
     />
   </a>
-<div class="p-6 bg-white dark:bg-gray-900 rounded-b-lg">
+
   <div class="flex items-center justify-between">
     <a href={`/blog/category/${post.data.category}`}>
       <Badge
         radius="md"
-        className="text-white bg-primary-color capitalize px-3 py-1 rounded"
+        className="capitalize text-xl font-semibold md:text-2xl md:mb-2 w-min rounded-full border-2 border-black bg-[#bc95d4] px-3 py-1.5 text-sm font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none"
         transition:name={"category-" + post.slug}
       >
         {post.data.category}
       </Badge>
     </a>
     <span
-      class="font-medium text-muted-foreground mb-2 transition duration-300 group-hover:text-primary-color text-base"
+      class="font-medium text-muted-foreground text-base text-[#999]"
       transition:name={"date-" + post.slug}
     >
       {formatDate(post.data.pubDate)}
@@ -43,15 +43,13 @@ const post = Astro.props;
   </div>
 
   <div>
-    <a href={`/blog/${post.slug}/`} class="block mt-2 text-gray-900 dark:text-white group-hover:underline">
+    <a href={`/blog/${post.slug}/`} class="group-hover:underline">
       <h2
-        class="font-heading text-xl md:text-2xl leading-snug line-clamp-3 mb-4 text-[32px]"
+        class="font-heading text-xl md:text-2xl leading-snug line-clamp-3 font-semibold text-[#333] md:white space-normal truncate"
         transition:name={"title-" + post.slug}
       >
         {post.data.title}
       </h2>
     </a>
   </div>
-      <strong class="text-primary-color font-semibold hover:underline">Read More</strong>
-</div>
 </article>

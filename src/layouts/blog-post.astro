@@ -5,8 +5,8 @@ import { cn, formatDate } from "@/lib/utils";
 import { Icon } from "astro-icon";
 import type { CollectionEntry } from "astro:content";
 import MainLayout from "./main-layout.astro";
-import { Link, Button } from "@nextui-org/react";
-import {Visibility} from '@mui/icons-material/';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
 import '@waline/client/style';
 import HoverCard from '@/components/HoverCardD';
 import DominantColorExtractor from '@/components/DominantColorExtractor';
@@ -45,8 +45,8 @@ const { title, description, pubDate, updatedDate, coverImage, category, tdes, pi
           {category}
         </Badge>
       </a>
-      <Badge radius="md" className="waline-pageview-count capitalize w-min rounded-full border-2 border-black bg-[#bc95d4] px-3 py-1.5 text-sm font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none" data-path="">
-        <Visibility sx={{ fontSize: 14 }}/>
+      <Badge radius="md" className="waline-pageview-count capitalize w-[48px] rounded-full border-2 border-black bg-[#bc95d4] px-3 py-1.5 text-sm font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none" data-path="">
+        <FontAwesomeIcon icon={faEye} />
       </Badge>
       <a data-fancybox data-src={coverImage}>
       <img
@@ -76,15 +76,7 @@ const { title, description, pubDate, updatedDate, coverImage, category, tdes, pi
       </h1>
       <p>{description}</p>
         <div class="flex flex-grow gap-2 gird">
-          <HoverCard thref={thref} tsrc={tsrc} username={username} tdes={tdes} tpubDate={tpubDate} client:load/>
-          <Button
-            className="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
-            href={pixiv}
-            as={Link}
-            style={{ backgroundColor: '#0096fa', color: 'white' }}
-          >
-            Pixiv
-          </Button>
+          <HoverCard thref={thref} tsrc={tsrc} username={username} tdes={tdes} tpubDate={tpubDate} pixiv={pixiv} client:load/>
         </div>
       <hr class="my-6" />
       <slot />
