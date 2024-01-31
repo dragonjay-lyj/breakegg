@@ -13,16 +13,22 @@ const { title, description, } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="dark">
   <head>
     <BaseHead title={title} description={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/favicon.ico" />
+    <style>
+      /* 添加一些自定义样式 */
+      .rounded-box { border-radius: 8px; }
+      .shadow-box { box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+      .transition-box { transition: all 0.3s ease-in-out; }
+    </style>
   </head>
-  <body class="flex flex-col min-h-screen text-gray-900 bg-white dark:bg-gray-900 dark:text-white transition-colors duration-300">
-    <div class="antialiased text-sm md:text-base">
+  <body class="flex flex-col min-h-screen antialiased text-gray-900 bg-white dark:bg-gray-900 dark:text-white transition-colors duration-300">
+    <div class="px-4 py-8 md:px-8 md:py-16">
       <slot />
     </div>
-    <TailwindIndicator className="absolute bottom-2 right-2 z-50 opacity-75 group-hover:opacity-100 transition-opacity duration-200" />
+    <TailwindIndicator className="absolute bottom-4 right-4 z-50 opacity-75 group-hover:opacity-100 transition-opacity duration-200 rounded-box shadow-box" />
   </body>
 </html>

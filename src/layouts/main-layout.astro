@@ -20,15 +20,6 @@ const { title, description, mainClass } = Astro.props;
 
 <BaseLayout title={title} description={description}>
   <Header>
-    {/* If using only normal links */}
-    {/* <MainNav items={marketingConfig.mainNav} slot="left-header" />
-    <SheetMobileNav
-      mainNavItems={marketingConfig.mainNav}
-      slot="mobile-nav-header"
-      client:load
-    /> */}
-
-    {/* If using Navigation Menu on desktop */}
     <MainNavigationMenu slot="left-header" client:load />
     <SheetMobileNav
       mainNavItems={[...navMenuConfig.links]}
@@ -41,6 +32,7 @@ const { title, description, mainClass } = Astro.props;
     />
 
     <nav slot="right-header" class="flex justify-end items-center">
+      {/* Add your right header content here */}
     </nav>
   </Header>
 
@@ -50,5 +42,7 @@ const { title, description, mainClass } = Astro.props;
     </div>
   </main>
 
-  <Footer className="bg-gray-100 dark:bg-gray-900 py-8" />
+  <Footer className="bg-gray-100 dark:bg-gray-900 py-8">
+    {/* Add your footer content here */}
+  </Footer>
 </BaseLayout>

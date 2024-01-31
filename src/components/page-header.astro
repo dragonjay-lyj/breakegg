@@ -9,14 +9,10 @@ interface Props extends HTMLAttributes<"div"> {
 const { heading, text, className, ...attrs } = Astro.props;
 ---
 
-<div class={`space-y-4 ${className}`} {...attrs}>
-  <h1 class="inline-block font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tighter">
+<div class={`space-y-6 md:space-y-8 ${className}`} {...attrs}>
+  <h1 class="inline-block font-heading text-4xl lg:text-5xl text-primary dark:text-primary-dark">
     {heading}
   </h1>
-  {text && (
-    <p class="text-xl text-gray-800 dark:text-gray-300 text-opacity-80 max-w-prose">
-      {text}
-    </p>
-  )}
+  {text && <p class="text-lg md:text-xl text-muted-foreground dark:text-muted-foreground-dark">{text}</p>}
 </div>
-<hr class="my-8 border-t border-gray-200 dark:border-gray-700 opacity-25" />
+<hr class="my-4 border-border dark:border-border-dark" />

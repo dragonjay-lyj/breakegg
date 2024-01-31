@@ -2,19 +2,13 @@
 const isDev = import.meta.env.DEV;
 ---
 
-{
-  isDev && (
-    <div class="fixed bottom-2 left-2 z-50 flex items-center justify-center rounded-lg p-2 text-xs font-mono text-white bg-gray-900 backdrop-blur-sm dark:bg-gray-700">
-      <span class="inline-block w-6 h-6 rounded-full border-2 border-white/50 mr-1">
-        <span class="sr-only">Screen Size</span>
-      </span>
-
-      <span class="hidden sm:block">xs</span>
-      <span class="hidden sm:hidden md:block">sm</span>
-      <span class="hidden md:hidden lg:block">md</span>
-      <span class="hidden lg:hidden xl:block">lg</span>
-      <span class="hidden xl:hidden 2xl:block">xl</span>
-      <span class="hidden 2xl:block">2xl</span>
-    </div>
-  )
-}
+{isDev && (
+  <div class="fixed bottom-2 left-2 z-50 flex space-x-1 items-center justify-center rounded-full bg-gray-800 p-2 shadow-lg">
+    <div class="block text-xs text-white sm:hidden">xs</div>
+    <div class="hidden text-xs text-white sm:block md:hidden">sm</div>
+    <div class="hidden text-xs text-white md:block lg:hidden">md</div>
+    <div class="hidden text-xs text-white lg:block xl:hidden">lg</div>
+    <div class="hidden text-xs text-white xl:block 2xl:hidden">xl</div>
+    <div class="hidden text-xs text-white 2xl:block">2xl</div>
+  </div>
+)}

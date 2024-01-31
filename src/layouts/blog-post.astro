@@ -22,65 +22,66 @@ const { title, description, pubDate, updatedDate, coverImage, category, tdes, pi
 
 <MainLayout title={title} description={description}>
   <DominantColorExtractor imageUrl={coverImage} client:load>
-  <div class="relative container max-w-screen-md py-10">
-    <a
-      href="/blog"
-      class={cn(
-        buttonVariants({ variant: "ghost" }),
-        "text-muted-foreground absolute left-[-200px] top-10 hidden cursor-pointer items-center rounded-md border-2 border-black bg-[#bc95d4] px-10 py-3 font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none xl:inline-flex"
-      )}
-      transition:animate="slide"
-    >
-      <Icon name="lucide:chevron-left" class="mr-2 size-4" />
-       看所有的帖子
-    </a>
+    <div class="relative container max-w-screen-md py-10">
+      <a
+        href="/blog"
+        class={cn(
+          buttonVariants({ variant: "ghost" }),
+          "text-muted-foreground absolute left-[-200px] top-10 hidden cursor-pointer items-center rounded-md border-2 border-black bg-[#bc95d4] px-10 py-3 font-bold shadow-sm transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-lg xl:inline-flex"
+        )}
+        transition:animate="slide"
+      >
+        <Icon name="lucide:chevron-left" class="mr-2 size-4" />
+        看所有的帖子
+      </a>
 
-    <article class="prose dark:prose-invert max-w-none">
-      <a href={`/blog/category/${category}`}>
+      <article class="prose dark:prose-invert max-w-none">
+        <a href={`/blog/category/${category}`}>
+          <Badge
+            radius="md"
+            className="capitalize w-min rounded-full border-2 border-black bg-[#bc95d4] px-3 py-1.5 text-sm font-bold shadow-sm transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-lg"
+            transition:name={"category-" + slug}
+          >
+            {category}
+          </Badge>
+        </a>
         <Badge
           radius="md"
-          className="capitalize w-min rounded-full border-2 border-black bg-[#bc95d4] px-3 py-1.5 text-sm font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none"
-          transition:name={"category-" + slug}
-        >
-          {category}
+          className="waline-pageview-count capitalize w-[48px] rounded-full border-2 border-black bg-[#bc95d4] px-3 py-1.5 text-sm font-bold shadow-sm transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-lg"
+          data-path="">
+          <FontAwesomeIcon icon={faEye} />
         </Badge>
-      </a>
-      <Badge radius="md" className="waline-pageview-count capitalize w-[48px] rounded-full border-2 border-black bg-[#bc95d4] px-3 py-1.5 text-sm font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none" data-path="">
-        <FontAwesomeIcon icon={faEye} />
-      </Badge>
-      <a data-fancybox data-src={coverImage}>
-      <img
-        class="rounded-xl overflow-hidden my-6"
-        width={1020}
-        height={510}
-        src={coverImage}
-        alt=""
-        transition:name={"img-" + slug}
-      />
-    </a>
-      <div class="flex items-center justify-between">
-        <span
-          class="font-medium text-muted-foreground"
-          transition:name={"date-" + slug}
-        >
-          {formatDate(pubDate)}
-          {
-            updatedDate && (
+        <a data-fancybox data-src={coverImage}>
+          <img
+            class="rounded-xl overflow-hidden my-6"
+            width={1020}
+            height={510}
+            src={coverImage}
+            alt=""
+            transition:name={"img-" + slug}
+          />
+        </a>
+        <div class="flex items-center justify-between">
+          <span
+            class="font-medium text-muted-foreground"
+            transition:name={"date-" + slug}
+          >
+            {formatDate(pubDate)}
+            {updatedDate && (
               <span>- Last updated on {formatDate(updatedDate)}</span>
-            )
-          }
-        </span>
-      </div>
-      <h1 class="font-heading text-4xl my-4" transition:name={"title-" + slug}>
-        {title}
-      </h1>
-      <p>{description}</p>
+            )}
+          </span>
+        </div>
+        <h1 class="font-heading text-4xl my-4" transition:name={"title-" + slug}>
+          {title}
+        </h1>
+        <p>{description}</p>
         <div class="flex flex-grow gap-2 gird">
           <HoverCard thref={thref} tsrc={tsrc} username={username} tdes={tdes} tpubDate={tpubDate} pixiv={pixiv} client:load/>
         </div>
-      <hr class="my-6" />
-      <slot />
-    </article>
+        <hr class="my-6 border-border dark:border-border-dark" />
+        <slot />
+      </article>
   </div>
   <div id="waline"></div>
     <script type="module">

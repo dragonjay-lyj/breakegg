@@ -14,36 +14,39 @@ const { className } = Astro.props;
 
 <header
   class={cn(
-    "mx-auto flex w-full max-w-full items-center justify-between pl-[2vw] pr-0 transition-all duration-[0.6s] bg-background dark:bg-background-dark sticky top-0 z-50 h-16 shadow-md backdrop-blur-md md:h-20 md:shadow-lg dark:backdrop-blur-md",
+    "flex items-center h-16 md:h-18 z-50 sticky top-0 bg-background",
     className
   )}
 >
-<div class="relative container flex items-center justify-between w-full">
-  <div class="flex items-center gap-6 md:gap-8 lg:gap-10">
-    <a href="/" class="hidden items-center space-x-2 md:flex">
-      <Icon name="stars-outline" class="size-8" />
-      <span class="hidden font-bold sm:inline-block">
-        {siteConfig.name}
-      </span>
-    </a>
+  <div class="relative container flex items-center justify-between w-full">
+    <div class="flex items-center gap-6 md:gap-8 lg:gap-10">
+      <a href="/" class="hidden items-center space-x-2 md:flex">
+        <Icon name="stars-outline" class="size-8" />
+        <span class="hidden font-bold sm:inline-block">
+          {siteConfig.name}
+        </span>
+      </a>
 
-    <slot name="mobile-nav-header" />
+      <slot name="mobile-nav-header" />
 
-    <div class="relative float-right ml-0 mr-auto hidden items-center md:flex">
-      <slot name="left-header" />
+      <div class="hidden md:flex">
+        <slot name="left-header" />
+      </div>
     </div>
-  </div>
 
-  <!-- logo mobile center -->
-  <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform md:hidden">
-    <a href="/" aria-label="Astronomy homepage" class="bg-neutral-foreground text-primary hover:bg-accent focus-visible:ring-primary flex items-center justify-center rounded-full p-2 transition-all duration-300 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
-      <Icon name="stars-outline" className="h-8 w-8" />
-    </a>
-  </div>
+    <!-- logo mobile center -->
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-4 -translate-y-4 md:hidden"
+    >
+      <a href="/" aria-label="Astronomy homepage">
+        <Icon name="stars-outline" class="size-8" />
+      </a>
+    </div>
 
-  <div class="mr-0 flex items-center space-x-4 border-l-2 border-solid border-l-[black]">
+    <slot name="right-header" />
+  </div>
+  <div class="hidden md:flex md:items-center md:space-x-2">
     <slot name="right-header" />
     <ModeToggle client:load />
   </div>
-</div>
 </header>
