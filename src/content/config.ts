@@ -7,14 +7,6 @@ const blog = defineCollection({
     description: z.string(),
     coverImage: z.string(),
     category: z.string(),
-    auther:z.string(),
-    link:z.string(),
-    pixiv:z.string(),
-    tsrc:z.string(),
-    username:z.string(),
-    tdes:z.string(),
-    thref:z.string(),
-    tpubDate:z.string(),
     // Transform string to Date object
     pubDate: z
       .string()
