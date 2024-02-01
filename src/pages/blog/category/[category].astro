@@ -8,8 +8,11 @@ import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
-  return posts.map((post) => ({
-    params: { category: post.data.category },
+  const allCategories = posts.flatMap((post) => post.data.category);
+  const categories = [...new Set(allCategories)];
+
+  return categories.map((category) => ({
+    params: { category },
   }));
 }
 
@@ -21,6 +24,8 @@ if (!category) {
     statusText: "Not found",
   });
 }
+
+// ... rest of the code
 
 const posts = await getPostsByCategory(category);
 ---

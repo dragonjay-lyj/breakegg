@@ -15,7 +15,7 @@ export const HoverCardD = ({ src, username, des, pubDate, link }) => {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
-        <Link href={link} color="foreground">{username}</Link>
+        <Link href={link} isExternal color="foreground">{username}</Link>
       </HoverCardTrigger>
       <HoverCardContent className="w-80">
     <div className="flex justify-between space-x-4">

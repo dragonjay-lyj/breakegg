@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 // Define the Component to extract dominant color
 const DominantColorExtractor = ({ imageUrl, children }) => {
-  const [dominantColor, setDominantColor] = useState('#FFF');
+  const [dominantColor, setDominantColor] = useState('#111827');
 
   useEffect(() => {
     // Function to extract dominant color from image

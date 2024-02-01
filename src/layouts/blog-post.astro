@@ -1,88 +1,93 @@
 ---
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { cn, formatDate } from "@/lib/utils";
+import { Link } from "@nextui-org/react";
+import { formatDate } from "@/lib/utils";
 import { Icon } from "astro-icon";
 import type { CollectionEntry } from "astro:content";
 import MainLayout from "./main-layout.astro";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import '@waline/client/style';
-import HoverCard from '@/components/HoverCardD';
+
 import DominantColorExtractor from '@/components/DominantColorExtractor';
 
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
-import { Image } from "astro:assets";
+import { Image } from "@nextui-org/react";
+import { X } from "@/components/x";
 
 type Props = CollectionEntry<"blog">;
 
 const slug = Astro.props.slug;
-const { title, description, pubDate, updatedDate, coverImage, category,} =
+const { title, pubDate, updatedDate, coverImage, category, xsrc, xlink, xusername, xname} =
   Astro.props.data;
 ---
 
-<MainLayout title={title} description={description}>
+<MainLayout title={title}>
   <DominantColorExtractor imageUrl={coverImage} client:load>
     <div class="relative container max-w-screen-md py-10">
-      <a
+      <Link
+        isBlock
         href="/blog"
-        class={cn(
-          buttonVariants({ variant: "ghost" }),
-          "text-muted-foreground absolute left-[-200px] top-10 hidden cursor-pointer items-center rounded-md border-2 border-black bg-[#bc95d4] px-10 py-3 font-bold shadow-sm transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-lg xl:inline-flex"
-        )}
+        className="absolute left-[-200px] top-10 -ml-3 mb-8 hidden cursor-pointer items-center px-10 py-3 xl:inline-flex"
         transition:animate="slide"
+        color="foreground"
+        size="sm"
       >
         <Icon name="lucide:chevron-left" class="mr-2 size-4" />
         看所有的帖子
-      </a>
+      </Link>
 
       <article class="prose dark:prose-invert max-w-none">
-        <a href={`/blog/category/${category}`}>
-          <Badge
-            radius="md"
-            className="capitalize w-min rounded-full border-2 border-black bg-[#bc95d4] px-3 py-1.5 text-sm font-bold shadow-sm transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-lg"
-            transition:name={"category-" + slug}
-          >
+        <Link 
+        href={`/blog/category/${category}`}
+        className="capitalize w-min px-3 py-1.5 text-sm shadow-sm hover:shadow-lg"
+        isBlock
+        transition:animate="slide"
+        color="foreground"
+        size="sm"
+        >
             {category}
-          </Badge>
-        </a>
+        </Link>
         <Badge
           radius="md"
           className="waline-pageview-count capitalize w-[48px] rounded-full border-2 border-black bg-[#bc95d4] px-3 py-1.5 text-sm font-bold shadow-sm transition-all hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-lg"
           data-path="">
           <FontAwesomeIcon icon={faEye} />
         </Badge>
-        <a data-fancybox data-src={coverImage}>
+          
+          <div class="flex items-center justify-between">
+            <span
+              class="font-medium text-muted-foreground"
+              transition:name={"date-" + slug}
+            >
+              {formatDate(pubDate)}
+              {updatedDate && (
+                <span>- Last updated on {formatDate(updatedDate)}</span>
+              )}
+            </span>
+          </div>
+          <X xsrc={xsrc} xlink={xlink} xname={xname} xusername={xusername} client:visible />
+          <h1 class="font-heading text-4xl my-4" transition:name={"title-" + slug}>
+            {title}
+          </h1>
+          <div class="my-8 flex items-center gap-4 rounded-2xl bg-[#D0E7D0]">
+            <div class="pl-6"><img src="https://i1.wp.com/i.ibb.co/pJjHvwP/image.png?ssl=1" class="w-[24px]" /></div>
+            <p class="pr-6 text-[#039C00]">本文翻译由智谱清言提供</p>
+          </div> 
+          <a data-fancybox data-src={coverImage}></a>
           <Image
-            class="rounded-xl overflow-hidden my-6"
-            width={1020}
-            height={510}
+            isBlurred
+            loading="lazy"
+            className="rounded-xl overflow-hidden my-6"
+            width={700}
+            height={350}
             src={coverImage}
             alt=""
             transition:name={"img-" + slug}
+            client:visible
           />
         </a>
-        <div class="flex items-center justify-between">
-          <span
-            class="font-medium text-muted-foreground"
-            transition:name={"date-" + slug}
-          >
-            {formatDate(pubDate)}
-            {updatedDate && (
-              <span>- Last updated on {formatDate(updatedDate)}</span>
-            )}
-          </span>
-        </div>
-        <h1 class="font-heading text-4xl my-4" transition:name={"title-" + slug}>
-          {title}
-        </h1>
-        <p>{description}</p>
-        <div class="flex flex-grow gap-2 gird">
-          <div class="my-8 flex items-center gap-4 rounded-2xl bg-[#D0E7D0]">
-            <div class="pl-6"><img src="https://i.ibb.co/pJjHvwP/image.png" class="w-[24px]" /></div>
-            <p class="pr-6 text-[#039C00]">本文翻译由智谱清言提供</p>
-          </div>          
-        </div>
+        
         <hr class="my-6 border-border dark:border-border-dark" />
         <slot />
       </article>

@@ -1,5 +1,5 @@
 ---
-import { Badge } from "@/components/ui/badge";
+import { Link } from "@nextui-org/react";
 import { formatDate } from "@/lib/utils";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
@@ -10,9 +10,9 @@ const post = Astro.props;
 ---
 
 <article class="group space-y-4 bg-white dark:bg-gray-900 rounded-2xl hover:scale-105 hover:shadow-xl hover:contrast-125 transition duration-300 ease-in-out overflow-hidden w-full">
-  <a
+  <Link
     href={`/blog/${post.slug}/`}
-    class="flex h-52 group-hover:-translate-y-2 transition duration-300 ease-in-out"
+    className="flex h-52 group-hover:-translate-y-2 transition duration-300 ease-in-out"
   >
     <Image
       class="w-full h-full object-cover rounded-xl overflow-hidden"
@@ -22,18 +22,19 @@ const post = Astro.props;
       alt="descriptive text"
       transition:name={"img-" + post.slug}
     />
-  </a>
+  </Link>
 
   <div class="flex items-center justify-between">
-    <a href={`/blog/category/${post.data.category}`}>
-      <Badge
-        radius="md"
-        className="capitalize text-xl font-semibold md:text-2xl md:mb-2 w-min rounded-full border-2 border-black bg-[#bc95d4] px-3 py-1.5 text-sm font-bold shadow-sm transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
-        transition:name={"category-" + post.slug}
-      >
+    <Link 
+    href={`/blog/category/${post.data.category}`}
+    className="capitalize w-min px-3 py-1.5 text-sm shadow-sm hover:shadow-lg"
+        isBlock
+        transition:animate="slide"
+        color="foreground"
+        size="sm"
+    >
         {post.data.category}
-      </Badge>
-    </a>
+    </Link>
     <span
       class="font-medium text-gray-500 text-sm md:text-base"
       transition:name={"date-" + post.slug}
@@ -43,13 +44,13 @@ const post = Astro.props;
   </div>
 
   <div>
-    <a href={`/blog/${post.slug}/`} class="group-hover:underline">
+    <Link href={`/blog/${post.slug}/`}>
       <h2
         class="font-heading text-xl md:text-2xl leading-snug line-clamp-3 font-semibold text-gray-800"
         transition:name={"title-" + post.slug}
       >
         {post.data.title}
       </h2>
-    </a>
+    </Link>
   </div>
 </article>
