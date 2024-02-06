@@ -14,8 +14,19 @@ import { Button,Link } from "@nextui-org/react";
 import { AtherCard } from "@/components/AtherCard";
 import CopyLinkButton from '@/components/CopyLinkButton';
 import AppreciateQRCodes from '@/components/AppreciateQRCodes';
+import AudioPlayerWithWaveform from '@/components/AudioPlayerWithWaveform.tsx';
 
-此乃忍者题材的作品，素来心向往之。故事讲述一位资深忍者，培养后辈的耐心，颇具深意。（？）若能再次观赏而乐在其中，实为吾的荣幸。此次，亦得友人协助，共撰词句。
+<AudioPlayerWithWaveform
+client:visible
+  roles={[
+    { name: '五郎', audioSrc: 'https://file.dragonjay.top/d/lanzou/audio/3k9x0a.wav?sign=hnXgsPYAnILR8t5o5ZKt_YpBCO0hDwL3uZt28-_hulU=:0' },
+    { name: '荒泷一斗', audioSrc: 'https://file.dragonjay.top/d/lanzou/audio/j1kzmn.wav?sign=d3ZnEu1OGyt9aw2XXJSvR2FtvX0lj7ciogyUkB5hVtA=:0' },
+    { name: '赛诺', audioSrc: 'https://file.dragonjay.top/d/lanzou/audio/0x25em.wav?sign=rZY2fKg8gVO_J8KvOh2yIfq5CBmrLRsuK5uEGwxbBrw=:0' },
+    { name: '魈', audioSrc: 'https://file.dragonjay.top/d/lanzou/audio/ugm885.wav?sign=q4UZukKecqifFc1--6h6Ze8HLcwWNW2eSANdUIRvsM4=:0' },
+  ]}
+/>
+
+这是一幅我之前试着画过的忍者情色画作。希望这幅画能帮助培养后辈的忍耐力，成为一位真正的前辈的故事。如果这次您也能愉快地观看，我将非常高兴！大使这次也是借助了朋友的帮助来创作的。
 
 <div class="grid gap-2 grid-cols-2">
 
