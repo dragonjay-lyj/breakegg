@@ -17,6 +17,7 @@ const AppreciateQRCodes: React.FC = () => {
           <ModalBody>
             
             <div className="grid gap-2 grid-cols-2">
+          <div className=''>微信
           <Image
           loading="lazy"
           isBlurred
@@ -24,6 +25,8 @@ const AppreciateQRCodes: React.FC = () => {
       alt="微信"
       src="https://i1.wp.com/i.ibb.co/gPYDVZC/wxpf2f0-A3-Od-YPia-HEFVtuk-UAXWeru-XC50p0c-Sk-L6-N8o-LV5-DZio.png"
     />
+    </div>
+    <div className=''>支付宝
     <Image
     loading="lazy"
     isBlurred
@@ -31,6 +34,7 @@ const AppreciateQRCodes: React.FC = () => {
       alt="支付宝"
       src="https://i1.wp.com/i.ibb.co/Jxks1z6/httpsqr-alipay-comfkx10123ym1kfeinpuekk36.png"
     />
+    </div>
     </div>
           </ModalBody>
           <ModalFooter>

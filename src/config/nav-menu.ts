@@ -22,6 +22,11 @@ export const navMenuConfig: NavMenuConfig = {
           href: "/blog",
           description: "一个使用内容集合构建的 Markdown/MDX 帖子。",
         },
+        {
+          title: "吾",
+          href: "/about",
+          description: "查看关于这个项目",
+        },
       ],
     },
   ],
