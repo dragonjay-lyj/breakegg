@@ -22,7 +22,7 @@ const { title, pubDate, updatedDate, coverImage, category, xsrc, xlink, xusernam
   Astro.props.data;
 ---
 
-<MainLayout title={title}>
+<MainLayout title={title} coverImage={coverImage}>
   <DominantColorExtractor imageUrl={coverImage} client:load>
     <div class="relative container max-w-screen-md py-10">
       <Link
